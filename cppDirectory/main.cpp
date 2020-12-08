@@ -10,6 +10,9 @@ int  main(){
 	recipe_head = recipe_tail = NULL;
 	
 	
+	
+	
+	
 	getchar();
 	return 0;
 }
