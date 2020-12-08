@@ -9,7 +9,7 @@
 
 //Recipe Service
 struct Recipe* InitializeRecipeNode();
-struct Recipe* CreateRecipeNode(char *description);
+struct Recipe* CreateRecipeNode(char *name, char *description);
 void RecipePushBack(struct Recipe **head, struct Recipe **tail, struct Recipe *inserted);
 void RecipePushFront(struct Recipe **head, struct Recipe **tail, struct Recipe *inserted);
 void RecipePopBack(struct Recipe **head, struct Recipe **tail);
@@ -39,9 +39,10 @@ struct Recipe* InitializeRecipeNode() {
 }
 
 //Create Node
-struct Recipe* CreateRecipeNode(char *description) {
+struct Recipe* CreateRecipeNode(char *name, char *description) {
 	struct Recipe *new_node = InitializeRecipeNode();
 	
+	new_node->name = name;
 	new_node->description = description;
 	new_node->ingredient_head = new_node->ingredient_tail = NULL;
 	new_node->instruct_head = new_node->instruct_tail = NULL;

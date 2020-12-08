@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include"../hDirectory/globalService.h"
+#include"../hDirectory/recommendationAlgo.cpp"
 #include<stdlib.h>
 
 int  main(){
@@ -9,9 +10,19 @@ int  main(){
 	struct Recipe *recipe_head, *recipe_tail;
 	recipe_head = recipe_tail = NULL;
 	
-	
-	
-	
+//	struct Recipe *cree = CreateRecipeNode((char *) "nama 1", (char *) "deskripsi kosong");
+//	RecipePushBack(&recipe_head, &recipe_tail, cree);
+//	
+//	cree = CreateRecipeNode((char *) "nama 2", (char *) "deskripsi kosong");
+//	RecipePushBack(&recipe_head, &recipe_tail, cree);
+//	
+//	cree = CreateRecipeNode((char *) "nama 3", (char *) "deskripsi kosong");
+//	RecipePushBack(&recipe_head, &recipe_tail, cree);
+//	
+//	cree = CreateRecipeNode((char *) "nama 4", (char *) "deskripsi kosong");
+//	RecipePushBack(&recipe_head, &recipe_tail, cree);
+//	
+//	printf("%s\n", recipeRecommendation(&recipe_head, (char *)"am"));
 	
 	getchar();
 	return 0;

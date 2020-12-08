@@ -4,25 +4,25 @@
 #include<iostream>
 #include<vector>
 #include <regex>
+#include "global.h"
 using namespace std;
-
 
 //DO NOT TOUCH!!!
 //REGEX MASIH DALAM PENGEMBANGAN
-void recommendation(){
-	string word = "a";
+const char* recipeRecommendation(struct Recipe **head, char* searched){
+	
+	
+	string word (searched);
+	
 	vector<string> listWord;
 	
-	listWord.push_back("David");
-	listWord.push_back("Charles");
-	listWord.push_back("Matthew");
-	listWord.push_back("Nich");
-	listWord.push_back("Jevon");
-	listWord.push_back("Michael");
-	listWord.push_back("Priscilla");
-	listWord.push_back("UwU");
-	listWord.push_back("NaCl");
-	
+	struct Recipe *curr = (*head);
+	while(curr != NULL){
+		string conver(curr->name);
+		listWord.push_back(conver);
+		curr = curr->next;
+	}
+
 	vector<string> filtered;
 	regex e1 (("(.*)(" + word + ")(.*)"), regex_constants::icase);
 		
@@ -33,10 +33,36 @@ void recommendation(){
 		}
 	}
 	
+	string joined = "";
 	for(auto it: filtered){
-		cout << it << '\n';
+//		cout << it << '\n';
+		joined += it + '\n';
 	}	
+	
+	return joined.c_str();
 }
+
+void aaa(char *pass[]){
+	for(int i = 0; pass[i] != NULL; i++){
+		printf("%s\n", pass[i]);
+	}
+}
+
+//int main(){
+//	
+//	char *arr[] = {
+//		"your name",
+//		"abcdefg",
+//		"hijklmno",
+//		"hijklmno",
+//	};;
+//	
+//	aaa(arr);
+//	
+//	return 0;
+//}
+
+
 
 
 #endif
