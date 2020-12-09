@@ -192,6 +192,18 @@ void InstructionsPopFront(struct Instructions **head, struct Instructions **tail
 	}
 }
 
+int InstructionsSize(struct Instructions **head, struct Instructions **tail){
+	int count = 0;
+
+	struct Instructions *curr = (*head);
+
+	while(curr != NULL){
+		count++;
+	}
+
+	return count;
+}
+
 //INGREDIENTS
 
 //Init Empty Node
