@@ -3,6 +3,7 @@
 
 #include<stdio.h>
 #include "globalService.h"
+#include "../model/Tugas-3Things.h"
 
 void KitchenListRecipes(struct Recipe **head, struct Recipe **tail){   
     int flag = 1;
@@ -25,6 +26,12 @@ void KitchenListInstruction(struct Recipe *curr){
         curr = curr->next;
         numbering++;
     }
+}
+
+void KitchenCookSelected(struct KitchenCook **curr) {
+    printf("Status: %d/%d Completed\n", (*curr)->step_done, KitchenCookCount(curr));
+
+
 }
 
 #endif

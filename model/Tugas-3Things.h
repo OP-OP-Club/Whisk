@@ -23,6 +23,7 @@ struct KitchenCook* CreateKitchenCookNode(struct Recipe *new_recipe) {
 	struct KitchenCook *new_node = InitializeKitchenCookNode();
 	
 	new_node->recipe = new_recipe;
+	new_node->step_done = 0;
 	new_node->next = new_node->prev = NULL;
 
 	return new_node;
@@ -88,6 +89,18 @@ void KitchenCookPopFront(struct KitchenCook **head, struct KitchenCook **tail){
 		
 		(*head) = curr;	
 	}
+}
+
+int KitchenCookCount(struct KitchenCook **head){
+	struct KitchenCook *curr = (*head);
+
+	int count = 0;
+	while(curr != NULL){
+		curr = curr->next;
+		count++;
+	}
+
+	return count;
 }
 
 
