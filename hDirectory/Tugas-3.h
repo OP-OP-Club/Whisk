@@ -33,8 +33,6 @@ void KitchenListInstruction(struct Recipe *recipe){
 
 void KitchenCookSelected(struct KitchenCook **curr) {
     printf("Status: %d/%d Completed\n", (*curr)->step_done, KitchenCookCount(curr));
-
-
 }
 
 void KitchenSelectRecipe();
@@ -156,6 +154,7 @@ void KitchenListKitchenCook(){
 }
 
 void KitchenViewRecipe(KitchenCook *select){
+    char choice;
     while(true){
         system("cls||clear");
         printf("Recipe: %s\n", select->recipe->name);
@@ -164,6 +163,8 @@ void KitchenViewRecipe(KitchenCook *select){
         printf("2. Start Cooking\n");
         printf("3. Stop Cooking\n");
         printf("0. Return\n");
+        printf(">> ");
+        scanf("%c", &choice);
     }
 }
 
