@@ -23,7 +23,7 @@ int  main(){
 //	RecipePushBack(&recipe_head, &recipe_tail, cree);
 //	
 //	printf("%s\n", recipeRecommendation(&recipe_head, (char *)"am"));
-	
+	printf("Test\n");
 	getchar();
 	return 0;
 }
