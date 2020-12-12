@@ -158,6 +158,12 @@ void KitchenListKitchenCook(){
 void KitchenViewRecipe(KitchenCook *select){
     while(true){
         system("cls||clear");
+        printf("Recipe: %s\n", select->recipe->name);
+        KitchenCookSelected(&select);
+        printf("1. List Ingredient\n");
+        printf("2. Start Cooking\n");
+        printf("3. Stop Cooking\n");
+        printf("0. Return\n");
     }
 }
 
