@@ -283,11 +283,4 @@ void IngredientPopFront(struct Ingredient **head, struct Ingredient **tail){
 	}
 }
 
-
-void clearScreen(){
-	for(int i=0;i<100;i++){
-		puts("");
-	}
-}
-
 #endif

@@ -4,6 +4,7 @@
 //DO NOT TOUCH!!! 
 //Boleh Lapor Terlebih dahulu jika melihat kekurangan atau ingin memberi saran tambahan
 //SEMUA TEMPAT UNTUK MENYIMPAN VARIABEL GLOBAL
+
 struct Recipe {
 	char *name;
 	char *description;
@@ -24,5 +25,8 @@ struct Ingredient {
 	
 	struct Ingredient *next, *prev;
 };
+
+struct Recipe *recipe_head, *recipe_tail;
+struct KitchenCook *kitchenCook_head, *kitchenCook_tail;
 
 #endif
