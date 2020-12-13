@@ -63,8 +63,55 @@ void KitchenMain(){
     
 }
 
-void KitchenSelectRecipe(){
-    if(recipe_head == NULL){
+void KitchenListKitchenCook(struct KitchenCook **kitchen_head, struct KithcenCook **kitchen_tail) {
+    struct KitchenCook *curr = (*kitchen_head);
+
+    int flag = 0;
+    while(curr != NULL){
+        printf("%d. %s\n", flag + 1, curr->recipe->name);
+        flag++;
+        curr = curr->next;
+    }
+
+    if(flag == 0){
+        printf("Empty\n");
+        printf("Press Enter To Continue\n");
+        getchar();
+        return;
+    }
+
+    printf("\n");
+    printf(">> ");
+    int choices;
+    scanf("%d", &choices);
+    getchar();
+
+    while(1){
+        if(choices == 0){
+            return;
+        }
+        if(choices > flag || choices < 0){
+            printf("Not Valid!!\nPress Enter To Continue\n");
+            getchar();
+        }
+        else{
+            choices--;
+            curr = (*kitchen_head);
+            while(choices--){
+                curr = curr->next;
+            }
+
+            KitchenViewRecipe(curr);
+            return;
+        }
+    }
+
+}
+
+void KitchenSelectRecipe(struct Recipe **recipe_head, struct Recipe **recipe_tail, struct KitchenCook **kitchen_head, struct KitchenCook **kitchen_tail){
+    struct Recipe *curr = (*recipe_head);
+
+    if(curr == NULL){
         printf("Tidak ada resep\n");
         printf("Press Enter to return");
         getchar();
@@ -75,14 +122,14 @@ void KitchenSelectRecipe(){
         while(true){
             system("cls||clear");
             printf("Select Recipe to Add (0 to return):\n");
-            KitchenListRecipes(&recipe_head, &recipe_tail);
+            KitchenListRecipes(recipe_head, recipe_tail);
             printf(">> ");
             scanf("%c", &choice);getchar();
             if(choice == '0'){
                 return;
             }
             int flag = 0;
-            struct Recipe *curr = recipe_head;
+            struct Recipe *curr = (*recipe_head);
             int idx = choice - '0';
             for(int i=1;i<idx;i++){
                 curr = curr->next;
@@ -98,17 +145,19 @@ void KitchenSelectRecipe(){
             }
             else{
                 struct KitchenCook *newKitchenCook = CreateKitchenCookNode(curr);
-                KitchenCookPushBack(&kitchenCook_head, &kitchenCook_tail, newKitchenCook);
+                KitchenCookPushBack(kitchen_head, kitchen_tail, newKitchenCook);
                 printf("Recipe %s has been added!\n", curr->name);
                 printf("Press Enter to return");
                 getchar();
+
+                break;
             }
         }
     }
 }
 
-void KitchenListKitchenCook(){
-    if(kitchenCook_head == NULL){
+void KitchenListKitchenCook(struct KitchenCook **kitchen_head, struct KitchenCook **kitchen_tail){
+    if((*kitchen_head) == NULL){
         printf("You have not added any recipes yet\n");
         printf("Press Enter to return");
         getchar();
@@ -118,14 +167,14 @@ void KitchenListKitchenCook(){
         char choice;
         while(true){
             system("cls||clear");
-            struct KitchenCook *curr = kitchenCook_head;
+            struct KitchenCook *curr = (*kitchen_head);
             int numbering = 1;
             while(curr != NULL){
                 printf("%d. %s\n", numbering, curr->recipe->name);
                 numbering++;
                 curr = curr->next;
             }
-            curr = kitchenCook_head;
+            curr = (*kitchen_head);
             printf("Select Recipe (0 to return):\n");
             scanf("%c", &choice); getchar();
             if(choice == '0'){
@@ -153,7 +202,19 @@ void KitchenListKitchenCook(){
     }
 }
 
-void KitchenViewRecipe(KitchenCook *select){
+void KitchenViewRecipeIngredient(struct KitchenCook *select) {
+    system("cls||clear");
+
+    struct Ingredient *curr = select->recipe->ingredient_head;
+
+    while(curr != NULL){
+        printf("%s\n", curr->name);
+        curr = curr->next;
+    }
+    getchar();
+}
+
+void KitchenViewRecipe(struct KitchenCook *select){
     char choice;
     while(true){
         system("cls||clear");
@@ -165,6 +226,7 @@ void KitchenViewRecipe(KitchenCook *select){
         printf("0. Return\n");
         printf(">> ");
         scanf("%c", &choice);
+        getchar();
     }
 }
 

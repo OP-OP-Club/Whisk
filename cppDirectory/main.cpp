@@ -9,9 +9,11 @@ int  main(){
 	
 	// Initialize Local Recipe Head
 	// Bakal dipakai ke function function sebagai PASSING-BY REFERENCE
+	struct Recipe *recipe_head, *recipe_tail;
+	struct KitchenCook *kitchen_head ,*kitchen_tail;
 	
 	recipe_head = recipe_tail = NULL;
-	kitchenCook_head = kitchenCook_tail = NULL;
+	kitchen_head = kitchen_tail = NULL;
 
 	
 	struct Recipe *cree = CreateRecipeNode((char *) "nama 1", (char *) "deskripsi kosong utk nama 1");

@@ -26,7 +26,7 @@ struct Ingredient {
 	struct Ingredient *next, *prev;
 };
 
-struct Recipe *recipe_head, *recipe_tail;
-struct KitchenCook *kitchenCook_head, *kitchenCook_tail;
+// struct Recipe *recipe_head, *recipe_tail;
+// struct KitchenCook *kitchenCook_head, *kitchenCook_tail;
 
 #endif
