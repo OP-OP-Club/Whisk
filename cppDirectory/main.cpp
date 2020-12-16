@@ -11,6 +11,8 @@ int  main(){
 	recipe_head = recipe_tail = NULL;
 	
 	insertNewRecipe(&recipe_head, &recipe_tail);
+	insertNewRecipe(&recipe_head, &recipe_tail);
+	insertNewRecipe(&recipe_head, &recipe_tail);
 	cookbook(&recipe_head, &recipe_tail);
 	
 	
