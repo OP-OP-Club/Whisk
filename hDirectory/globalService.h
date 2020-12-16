@@ -7,6 +7,14 @@
 //External Library
 #include "global.h"
 
+// Pantry Struct
+struct PantryIngredient{
+	char group[255];
+	char name[255];
+	int qty;
+	PantryIngredient *next, *prev;
+} *PantryHead, *PantryTail;
+
 //Recipe Service
 struct Recipe* InitializeRecipeNode();
 struct Recipe* CreateRecipeNode(char *description);
@@ -270,5 +278,60 @@ void IngredientPopFront(struct Ingredient **head, struct Ingredient **tail){
 	}
 }
 
+PantryIngredient *createPantryIngredient(char *group, char *name, int qty){
+	PantryIngredient *temp = (PantryIngredient*)malloc(sizeof(PantryIngredient));
+	strcpy(temp->group, group);
+	strcpy(temp->name, name);
+	temp->qty = qty;
+	temp->next = temp->prev = NULL;
+	return temp;
+}
 
+void PantryIngredientPushHead(char *group, char *name, int qty){
+	PantryIngredient *temp = createPantryIngredient(group, name, qty);
+	if(!PantryHead){
+		PantryHead = PantryTail = temp;
+	} else {
+		PantryHead->prev = temp;
+		temp->next = PantryHead;
+		PantryHead = temp;
+	}
+}
+
+void PantryIngredientPushTail(char *group, char *name, int qty){
+	PantryIngredient *temp = createPantryIngredient(group, name, qty);
+	if(PantryHead){
+		PantryHead = PantryTail = temp;
+	} else {
+		PantryTail->next = temp;
+		temp->prev = PantryTail;
+		PantryTail = temp;
+	}
+}
+
+void PantryIngredientPushMid(char *group, char *name, int qty){
+	if(!PantryHead){
+		PantryIngredient *temp = createPantryIngredient(group, name, qty);
+		PantryHead = PantryTail = temp;
+	} else if(strcmp(PantryHead->name, name) >= 0){
+		PantryIngredientPushHead(group, name, qty);
+		
+	} else if(strcmp(PantryTail->name, name) <= 0){
+		PantryIngredientPushTail(group, name, qty);
+		
+	} else {
+		PantryIngredient *temp = createPantryIngredient(group, name, qty);
+		
+		struct PantryIngredient *curr = PantryHead;
+		
+		while(strcmp(curr->name, name) < 0){
+			curr = curr->next;
+		}
+		
+		temp->prev = curr->prev;
+		temp->next = curr;
+		curr->prev->next = temp;
+		curr->prev = temp;
+	}	
+}
 #endif
