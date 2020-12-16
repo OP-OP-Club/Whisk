@@ -6,6 +6,54 @@
 
 char PantryIngredientGroup[7][255]={"Beans", "Dairy", "Fruits", "Meats", "Others","Spices", "Vegetables" };
 
+void PantryIngredientPushHead(char *group, char *name, int qty){
+	PantryIngredient *temp = createPantryIngredient(group, name, qty);
+	if(!PantryHead){
+		PantryHead = PantryTail = temp;
+	} else {
+		PantryHead->prev = temp;
+		temp->next = PantryHead;
+		PantryHead = temp;
+	}
+}
+
+void PantryIngredientPushTail(char *group, char *name, int qty){
+	PantryIngredient *temp = createPantryIngredient(group, name, qty);
+	if(!PantryHead){
+		PantryHead = PantryTail = temp;
+	} else {
+		PantryTail->next = temp;
+		temp->prev = PantryTail;
+		PantryTail = temp;
+	}
+}
+
+void PantryIngredientPushMid(char *group, char *name, int qty){
+	if(!PantryHead){
+		PantryIngredient *temp = createPantryIngredient(group, name, qty);
+		PantryHead = PantryTail = temp;
+	} else if(strcmp(PantryHead->name, name) >= 0){
+		PantryIngredientPushHead(group, name, qty);
+		
+	} else if(strcmp(PantryTail->name, name) <= 0){
+		PantryIngredientPushTail(group, name, qty);
+		
+	} else {
+		PantryIngredient *temp = createPantryIngredient(group, name, qty);
+		
+		struct PantryIngredient *curr = PantryHead;
+		
+		while(strcmp(curr->name, name) < 0){
+			curr = curr->next;
+		}
+		
+		temp->prev = curr->prev;
+		temp->next = curr;
+		curr->prev->next = temp;
+		curr->prev = temp;
+	}	
+}
+
 void AddPantryIngredient(){
 	char NameTemp[255];
 	char GroupTemp[255];
@@ -502,16 +550,16 @@ void pantryMenu(struct Recipe **recipe_head, struct Recipe **recipe_tail) {
         printf("===================\n");
         puts("");
         printf("1. Insert Ingredient\n");
-        printf("2. Delete Ingredient\n");
-        printf("3. View Ingredients\n");
-        printf("4. Search Ingredient\n");
-        printf("5. Insert Recipe\n");
-        printf("6. Exit\n");
+        // printf("2. Delete Ingredient\n");
+        printf("2. View Ingredients\n");
+        printf("3. Search Ingredient\n");
+        printf("4. Insert Recipe\n");
+        printf("5. Exit\n");
         printf(">> ");
         scanf("%s", choice);
         if (strlen(choice) > 1) {
             cFlag = 0;
-        } else if (choice[0] < '1' || choice[0] > '6') {
+        } else if (choice[0] < '1' || choice[0] > '5') {
             cFlag = 0;
         }
     } while (cFlag == 0);
@@ -519,14 +567,12 @@ void pantryMenu(struct Recipe **recipe_head, struct Recipe **recipe_tail) {
     if (choice[0] == '1') {
         AddPantryIngredient();
     } else if (choice[0] == '2') {
-
+		viewMenu();
     } else if (choice[0] == '3' ) {
-        viewMenu();
-    } else if (choice[0] == '4') {
         searchIngredient();
-    } else if (choice[0] == '5') {
+    } else if (choice[0] == '4') {
         addRecipe(recipe_head, recipe_tail);
-    } else {
+    } else if (choice[0] == '5') {
         return;
-    }
+    } 
 }
