@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include"../hDirectory/globalService.h"
 #include<stdlib.h>
+#include"../hDirectory/Tugas-2.h"
 
 int  main(){
 	
@@ -9,8 +10,8 @@ int  main(){
 	struct Recipe *recipe_head, *recipe_tail;
 	recipe_head = recipe_tail = NULL;
 	
-	
-	
+	insertNewRecipe(&recipe_head, &recipe_tail);
+	cookbook(&recipe_head, &recipe_tail);
 	
 	
 	getchar();
