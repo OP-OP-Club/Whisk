@@ -284,5 +284,4 @@ void IngredientPopFront(struct Ingredient **head, struct Ingredient **tail){
 	}
 }
 
-
 #endif
