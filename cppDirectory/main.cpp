@@ -2,6 +2,7 @@
 #include"../hDirectory/globalService.h"
 #include"../hDirectory/recommendationAlgo.cpp"
 #include<stdlib.h>
+#include"../hDirectory/Tugas-2.h"
 
 int  main(){
 	

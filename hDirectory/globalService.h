@@ -3,6 +3,7 @@
 
 //STD Library
 #include<stdlib.h>
+#include<string.h>
 
 //External Library
 #include "global.h"
@@ -42,8 +43,8 @@ struct Recipe* InitializeRecipeNode() {
 struct Recipe* CreateRecipeNode(char *name, char *description) {
 	struct Recipe *new_node = InitializeRecipeNode();
 	
-	new_node->name = name;
-	new_node->description = description;
+	strcpy(new_node->description, description);
+	strcpy(new_node->name, name);
 	new_node->ingredient_head = new_node->ingredient_tail = NULL;
 	new_node->instruct_head = new_node->instruct_tail = NULL;
 	new_node->next = new_node->prev = NULL;
@@ -124,7 +125,7 @@ struct Instructions* InitializeInstructionsNode() {
 struct Instructions* CreateInstructionsNode(char *steps) {
 	struct Instructions *new_node = InitializeInstructionsNode();
 	
-	new_node->steps = steps;
+	strcpy(new_node->steps, steps);
 	new_node->next = new_node->prev = NULL;
 	
 	return new_node;
@@ -215,7 +216,7 @@ struct Ingredient* InitializeIngredientNode() {
 struct Ingredient* CreateIngredientNode(char *name) {
 	struct Ingredient *new_node = InitializeIngredientNode();
 	
-	new_node->name = name;
+	strcpy(new_node->name, name);
 	new_node->next = new_node->prev = NULL;
 	
 	return new_node;
